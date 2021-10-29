@@ -22,8 +22,8 @@ class YourItemScreen extends StatefulWidget {
     required Function(YourItem, int) onUpdate,
   }) {
     return MaterialPage(
-      name: TemplatePages.groceryItemDetails,
-      key: ValueKey(TemplatePages.groceryItemDetails),
+      name: TemplatePages.home,
+      key: ValueKey(TemplatePages.home),
       child: YourItemScreen(
         originalItem: item,
         index: index,

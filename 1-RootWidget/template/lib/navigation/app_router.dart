@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/ui/screens/your_item_screen.dart';
+import 'package:template/ui/models/consumer_manager.dart';
 
 import '../ui/models/models.dart';
 import '../ui/screens/screens.dart';
@@ -15,20 +15,20 @@ class AppRouter extends RouterDelegate
   // 3
   final AppStateManager appStateManager;
   // 4
-  final YourItemManager yourItemManager;
+  final ConsumerManager profileManager;
 
   AppRouter({
     required this.appStateManager,
-    required this.yourItemManager,
+    required this.profileManager,
   }) : navigatorKey = GlobalKey<NavigatorState>() {
     appStateManager.addListener(notifyListeners);
-    yourItemManager.addListener(notifyListeners);
+    profileManager.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     appStateManager.removeListener(notifyListeners);
-    yourItemManager.removeListener(notifyListeners);
+    profileManager.removeListener(notifyListeners);
     super.dispose();
   }
 
@@ -48,18 +48,18 @@ class AppRouter extends RouterDelegate
           LoginScreen.page(),
 
         if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
-          OnboardingScreen.page(),
+          SplashScreen.page(),
 
         if (appStateManager.isOnboardingComplete)
           Home.page(appStateManager.getSelectedTab),
 
         // 1
-        if (yourItemManager.isCreatingNewItem)
+        if (profileManager.isCreatingNewConsumer)
           // 2
-          YourItemScreen.page(
+          ProfileScreen.page(
             onCreate: (item) {
               // 3
-              yourItemManager.addItem(item);
+              profileManager.addConsumer(item);
             },
             onUpdate: (item, index) {
               // 4 No update
@@ -83,20 +83,12 @@ class AppRouter extends RouterDelegate
     }
 
     // 5
-    if (route.settings.name == FooderlichPages.onboardingPath) {
+    if (route.settings.name == TemplatePages.onboardingPath) {
       appStateManager.logout(); // User < back to login from Onboarding page
     }
 
-    if (route.settings.name == FooderlichPages.groceryItemDetails) {
-      groceryManager.groceryItemTapped(-1);
-    }
-
-    if (route.settings.name == FooderlichPages.profilePath) {
+    if (route.settings.name == TemplatePages.profilePath) {
       profileManager.tapOnProfile(false);
-    }
-
-    if (route.settings.name == FooderlichPages.raywenderlich) {
-      profileManager.tapOnRaywenderlich(false);
     }
     // 6
     return true;
