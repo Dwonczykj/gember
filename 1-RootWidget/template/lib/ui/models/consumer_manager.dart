@@ -52,4 +52,8 @@ class ConsumerManager extends ChangeNotifier {
     _createNewConsumer = false;
     notifyListeners();
   }
+
+  void tapOnOwnProfile(bool bool) {
+    //TODO: Update this class to not be a Consumer creater but rather an personal profile manager. So addConsumer does not exist., _isCreatingConsumer does not exist.
+  }
 }

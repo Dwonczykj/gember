@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:template/ui/main_screen.dart';
 import 'package:template/ui/models/consumer_manager.dart';
+import 'package:template/ui/models/project_manager.dart';
 
 import '../ui/models/models.dart';
 import '../ui/screens/screens.dart';
@@ -17,18 +19,23 @@ class AppRouter extends RouterDelegate
   // 4
   final ConsumerManager profileManager;
 
+  final ProjectManager projectManager;
+
   AppRouter({
     required this.appStateManager,
     required this.profileManager,
+    required this.projectManager,
   }) : navigatorKey = GlobalKey<NavigatorState>() {
     appStateManager.addListener(notifyListeners);
     profileManager.addListener(notifyListeners);
+    projectManager.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     appStateManager.removeListener(notifyListeners);
     profileManager.removeListener(notifyListeners);
+    projectManager.removeListener(notifyListeners);
     super.dispose();
   }
 
@@ -51,7 +58,7 @@ class AppRouter extends RouterDelegate
           SplashScreen.page(),
 
         if (appStateManager.isOnboardingComplete)
-          Home.page(appStateManager.getSelectedTab),
+          MainScreen.page(appStateManager.getSelectedTab),
 
         // 1
         // if (profileManager.isCreatingNewConsumer)
