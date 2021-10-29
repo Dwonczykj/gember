@@ -54,19 +54,19 @@ class AppRouter extends RouterDelegate
           Home.page(appStateManager.getSelectedTab),
 
         // 1
-        if (profileManager.isCreatingNewConsumer)
-          // 2
-          ProfileScreen.page(
-            onCreate: (item) {
-              // 3
-              profileManager.addConsumer(item);
-            },
-            onUpdate: (item, index) {
-              // 4 No update
-            },
-          ),
+        // if (profileManager.isCreatingNewConsumer)
+        //   // 2
+        //   ProfileScreen.page(
+        //     onCreate: (item) {
+        //       // 3
+        //       profileManager.addConsumer(item);
+        //     },
+        //     onUpdate: (item, index) {
+        //       // 4 No update
+        //     },
+        //   ),
 
-        // 1
+        // // 1
       ],
     );
   }
@@ -88,7 +88,7 @@ class AppRouter extends RouterDelegate
     }
 
     if (route.settings.name == TemplatePages.profilePath) {
-      profileManager.tapOnProfile(false);
+      appStateManager.goToTab(appStateManager.getSelectedTab);
     }
     // 6
     return true;
