@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:intl/intl.dart';
-// import 'package:uuid/uuid.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 // import '../components/grocery_tile.dart';
 import '../colors.dart';
@@ -49,7 +49,7 @@ class YourItemScreen extends StatefulWidget {
 class _YourItemScreenState extends State<YourItemScreen> {
   final _nameController = TextEditingController();
   String _name = '';
-  Importance _importance = Importance.low;
+  // Importance _importance = Importance.low;
   DateTime _dueDate = DateTime.now();
   TimeOfDay _timeOfDay = TimeOfDay.now();
   Color _currentColor = Colors.green;
@@ -108,14 +108,14 @@ class _YourItemScreenState extends State<YourItemScreen> {
   void initState() {
     final originalItem = widget.originalItem;
     if (originalItem != null) {
-      _name = originalItem.name;
-      _nameController.text = originalItem.name;
-      _currentSliderValue = originalItem.quantity;
-      _importance = originalItem.importance;
-      _currentColor = originalItem.color;
-      final date = originalItem.date;
-      _timeOfDay = TimeOfDay(hour: date.hour, minute: date.minute);
-      _dueDate = date;
+      // _name = originalItem.name;
+      // _nameController.text = originalItem.name;
+      // _currentSliderValue = originalItem.quantity;
+      // _importance = originalItem.importance;
+      // _currentColor = originalItem.color;
+      // final date = originalItem.date;
+      // _timeOfDay = TimeOfDay(hour: date.hour, minute: date.minute);
+      // _dueDate = date;
     }
 
     _nameController.addListener(() {

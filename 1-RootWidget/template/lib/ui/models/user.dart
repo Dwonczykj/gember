@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
-class User {
+class User extends Equatable {
   final String uid;
 
   final String? name;
@@ -15,4 +16,7 @@ class User {
       User(uid: json['uid'], name: json['name']);
 
   Map<String, dynamic> toJson() => {'uid': uid, 'name': name};
+
+  @override
+  List<Object?> get props => [uid];
 }

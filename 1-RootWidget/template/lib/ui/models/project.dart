@@ -9,10 +9,10 @@ class Project {
 
   Map<String, dynamic> toJson() => _$ProjectToJson(this);
 
-  @JsonKey(name: '')
-  String query;
+  @JsonKey(name: 'uid')
+  String uid;
 
   Project({
-    required this.query,
+    required this.uid,
   });
 }
