@@ -63,7 +63,16 @@ class _GemberState extends State<Gember> {
         //   create: (_) => repository,
         //   dispose: (_, Repository repository) => repository.close(),
         // ),
-        Provider<ServiceInterface<AAPIQuery>>(
+        ChangeNotifierProvider(
+          create: (context) => _consumerManager,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => _projectManager,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => _appStateManager,
+        ),
+        Provider<ServiceInterface>(
           create: (_) => TemplateService.create(),
           lazy: false,
         ),

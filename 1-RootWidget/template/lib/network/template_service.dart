@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:template/network/api_query_model.dart';
 import 'package:template/network/service_interface.dart';
+import 'package:template/ui/models/models.dart';
 import 'model_response.dart';
 
 part 'template_service.chopper.dart';
@@ -12,9 +13,13 @@ const String apiUrl = 'https://api.edamam.com';
 @ChopperApi()
 abstract class TemplateService extends ChopperService
     implements ServiceInterface {
+  // @override
+  // @Get(path: 'search')
+  // Future<Response<Result<List<Project>>>> queryProjects(@Query('q') String query);
   @override
   @Get(path: 'search')
-  Future<Response<Result<AAPIQuery>>> querySomething(@Query('q') String query);
+  Future<Response<Result<List<Project>>>> queryProjects(
+      @Query('q') String query);
 
   static TemplateService create() {
     final client = ChopperClient(
@@ -28,6 +33,8 @@ abstract class TemplateService extends ChopperService
         );
     return _$TemplateService(client);
   }
+
+  void init();
 }
 
 Request _addQuery(Request req) {

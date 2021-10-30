@@ -17,10 +17,10 @@ class _$TemplateService extends TemplateService {
   final definitionType = TemplateService;
 
   @override
-  Future<Response<Result<AAPIQuery>>> querySomething(String query) {
+  Future<Response<Result<List<Project>>>> queryProjects(String query) {
     final $url = 'search';
     final $params = <String, dynamic>{'q': query};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
-    return client.send<Result<AAPIQuery>, AAPIQuery>($request);
+    return client.send<Result<List<Project>>, Project>($request);
   }
 }
