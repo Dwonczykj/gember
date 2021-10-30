@@ -23,6 +23,7 @@ class ProjectCard extends StatelessWidget {
                   topRight: Radius.circular(6.0)),
               child: CachedNetworkImage(
                   imageUrl: project.image_url, height: 210, fit: BoxFit.fill)),
+          // child: Container(color: Colors.red)),
           const SizedBox(
             height: 12.0,
           ),
@@ -41,7 +42,7 @@ class ProjectCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              project.CompanyName,
+              project.company_name,
               style: const TextStyle(
                 fontWeight: FontWeight.normal,
                 fontSize: 11,

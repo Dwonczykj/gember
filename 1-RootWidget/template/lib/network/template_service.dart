@@ -34,7 +34,7 @@ abstract class TemplateService extends ChopperService
     return _$TemplateService(client);
   }
 
-  void init();
+  void init() {}
 }
 
 Request _addQuery(Request req) {

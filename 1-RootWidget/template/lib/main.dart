@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:template/network/mock_service.dart';
 import 'package:template/network/template_service.dart';
 import 'package:template/ui/main_screen.dart';
 import 'package:template/ui/models/app_state_manager.dart';
@@ -73,7 +74,7 @@ class _GemberState extends State<Gember> {
           create: (context) => _appStateManager,
         ),
         Provider<ServiceInterface>(
-          create: (_) => TemplateService.create(),
+          create: (_) => MockService.create(),
           lazy: false,
         ),
       ],

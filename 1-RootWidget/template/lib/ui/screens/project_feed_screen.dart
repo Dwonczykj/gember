@@ -139,12 +139,13 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
           final query = (result as Success).value;
           inErrorState = false;
           if (query != null) {
-            currentCount = query.count;
-            hasMore = query.more;
-            currentSearchList.addAll(query.hits);
-            if (query.to < currentEndPosition) {
-              currentEndPosition = query.to;
-            }
+            currentCount = query.length;
+            // hasMore = query.more;
+            // currentSearchList.addAll(query.hits);
+            // if (query.to < currentEndPosition) {
+            //   currentEndPosition = query.to;
+            // }
+
           }
           return _buildProjectList(context, currentSearchList);
         } else {
@@ -178,7 +179,6 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
           ),
           const SizedBox(height: 16),
           Container(
-            height: 400,
             color: Colors.transparent,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
