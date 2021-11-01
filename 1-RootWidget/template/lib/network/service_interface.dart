@@ -5,5 +5,5 @@ import 'api_query_model.dart';
 import 'model_response.dart';
 
 abstract class ServiceInterface {
-  Future<Response<Result<List<Project>>>> queryProjects(String query);
+  Future<Response<Result<List<GreenProject>>>> queryProjects(String query);
 }

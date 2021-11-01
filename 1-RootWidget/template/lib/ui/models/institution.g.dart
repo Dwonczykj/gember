@@ -13,7 +13,7 @@ Institution _$InstitutionFromJson(Map<String, dynamic> json) {
     website: json['website'] as String?,
     address: json['address'] as String?,
     projects: (json['projects'] as List<dynamic>)
-        .map((e) => Project.fromJson(e as Map<String, dynamic>))
+        .map((e) => GreenProject.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
 }

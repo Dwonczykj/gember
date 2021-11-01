@@ -18,7 +18,7 @@ abstract class TemplateService extends ChopperService
   // Future<Response<Result<List<Project>>>> queryProjects(@Query('q') String query);
   @override
   @Get(path: 'search')
-  Future<Response<Result<List<Project>>>> queryProjects(
+  Future<Response<Result<List<GreenProject>>>> queryProjects(
       @Query('q') String query);
 
   static TemplateService create() {

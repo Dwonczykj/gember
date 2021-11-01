@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'consumer.dart';
-import 'project.dart';
+import 'green_project.dart';
 
 class ConsumerManager extends ChangeNotifier {
   final _consumers = <Consumer>[];
@@ -36,12 +36,12 @@ class ConsumerManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addConsumerPriority(Consumer consumer, Project project) {
+  void addConsumerPriority(Consumer consumer, GreenProject project) {
     var c = _consumers.singleWhere((element) => element == consumer);
     c.priorities.add(project);
   }
 
-  void deleteConsumerPriority(Consumer consumer, Project project) {
+  void deleteConsumerPriority(Consumer consumer, GreenProject project) {
     var c = _consumers.singleWhere((element) => element == consumer);
     c.priorities.removeWhere((element) => element.uid == project.uid);
   }

@@ -10,6 +10,6 @@ export 'institution.dart';
 
 export 'product.dart';
 export 'initiative.dart';
-export 'project.dart';
+export 'green_project.dart';
 
 export 'environmental_impact.dart';

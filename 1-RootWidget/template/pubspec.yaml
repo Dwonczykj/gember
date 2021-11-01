@@ -70,6 +70,7 @@ flutter:
     - assets/images/
     - assets/profile_pics/
     - assets/mock_data/
+    - assets/mock_data/images/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

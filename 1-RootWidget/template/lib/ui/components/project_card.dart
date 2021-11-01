@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:template/ui/models/project.dart';
+import 'package:template/ui/models/green_project.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ProjectCard extends StatelessWidget {
-  final Project project;
+  final GreenProject project;
 
   const ProjectCard({Key? key, required this.project}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    const itemHeight = 310;
+    final itemWidth = size.width;
     return Card(
       elevation: 4.0,
       shape: RoundedRectangleBorder(
@@ -27,31 +30,36 @@ class ProjectCard extends StatelessWidget {
           const SizedBox(
             height: 12.0,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              project.name,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              project.company_name,
-              style: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 11,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
+          Expanded(
+              flex: 4,
+              child: Column(children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    project.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    project.company_name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8.0,
+                )
+              ])),
         ],
       ),
     );

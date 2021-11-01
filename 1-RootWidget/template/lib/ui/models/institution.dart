@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'project.dart';
+import 'green_project.dart';
 part 'institution.g.dart';
 
 @JsonSerializable()
@@ -11,7 +11,7 @@ class Institution {
   @JsonKey(name: 'uid')
   String uid;
   String name;
-  var projects = <Project>[];
+  var projects = <GreenProject>[];
   String? website;
   String? address;
 
@@ -20,5 +20,5 @@ class Institution {
       required this.name,
       this.website,
       this.address,
-      List<Project> projects = const <Project>[]});
+      List<GreenProject> projects = const <GreenProject>[]});
 }

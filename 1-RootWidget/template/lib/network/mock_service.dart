@@ -7,7 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:template/network/model_response.dart';
 import 'package:template/network/service_interface.dart';
 import 'package:template/network/template_service.dart';
-import 'package:template/ui/models/project.dart';
+import 'package:template/ui/models/green_project.dart';
 
 // part 'mock_service.chopper.dart';
 
@@ -28,12 +28,12 @@ class MockService implements ServiceInterface {
   }
 
   @override
-  Future<Response<Result<List<Project>>>> queryProjects(String query) {
+  Future<Response<Result<List<GreenProject>>>> queryProjects(String query) {
     return Future.value(Response(http.Response('Dummy', 200, request: null),
-        Success<List<Project>>(_projects_list.toList())));
+        Success<List<GreenProject>>(_projects_list.toList())));
   }
 
-  late Iterable<Project> _projects_list;
+  late Iterable<GreenProject> _projects_list;
   Random nextRecipe = Random();
 
   void init() {
@@ -44,6 +44,6 @@ class MockService implements ServiceInterface {
     var jsonString =
         await rootBundle.loadString('assets/mock_data/projects.json');
     _projects_list = (jsonDecode(jsonString)['projects'] as List)
-        .map((element) => Project.fromJson(element));
+        .map((element) => GreenProject.fromJson(element));
   }
 }

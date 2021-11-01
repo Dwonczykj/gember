@@ -82,18 +82,24 @@ class FooderlichTheme {
   }
 
   static ThemeData dark() {
+    // ThemeData(
+    //       brightness: Brightness.light,
+    //       primaryColor: Colors.white,
+    //       primarySwatch: Colors.blue,
+    //       visualDensity: VisualDensity.adaptivePlatformDensity,
+    //     ),
     return ThemeData(
       brightness: Brightness.dark,
       appBarTheme: AppBarTheme(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.blueGrey[900],
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.lightBlue,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
+        selectedItemColor: Colors.blue,
       ),
       textTheme: darkTextTheme,
     );

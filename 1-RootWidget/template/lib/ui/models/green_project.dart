@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-// part 'project.g.dart';
+part 'green_project.g.dart';
 
 @JsonSerializable()
-class Project {
+class GreenProject {
   @JsonKey(name: 'uid')
   final String uid;
 
@@ -15,7 +15,7 @@ class Project {
   final String description;
   final String short_description;
 
-  Project({
+  GreenProject({
     required this.uid,
     required this.name,
     this.image_url = "",
@@ -24,7 +24,7 @@ class Project {
     this.short_description = "",
   });
 
-  factory Project.fromJson(Map<String, dynamic> json) => Project(
+  factory GreenProject.fromJson(Map<String, dynamic> json) => GreenProject(
         uid: json['uid'] as String,
         name: json['project_name'] as String,
         image_url: json['image_url'] as String,
@@ -41,4 +41,21 @@ class Project {
         'description': description,
         'short_description': short_description,
       };
+}
+
+class Project extends GreenProject {
+  Project({
+    required uid,
+    required name,
+    image_url = "",
+    company_name = "",
+    description = "",
+    short_description = "",
+  }) : super(
+            uid: uid,
+            name: name,
+            image_url: image_url,
+            company_name: company_name,
+            description: description,
+            short_description: short_description);
 }

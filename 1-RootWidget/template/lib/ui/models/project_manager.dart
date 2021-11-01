@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'Project.dart';
+import 'green_project.dart';
 
 class ProjectManager extends ChangeNotifier {
-  final _projects = <Project>[];
+  final _projects = <GreenProject>[];
   int _selectedIndex = -1;
   bool _createNewProject = false;
 
-  List<Project> get projects => List.unmodifiable(_projects);
+  List<GreenProject> get projects => List.unmodifiable(_projects);
   int get selectedIndex => _selectedIndex;
-  Project? get selectedGroceryProject =>
+  GreenProject? get selectedGroceryProject =>
       _selectedIndex != -1 ? _projects[_selectedIndex] : null;
   bool get isCreatingNewProject => _createNewProject;
 
@@ -29,13 +29,13 @@ class ProjectManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addProject(Project project) {
+  void addProject(GreenProject project) {
     _projects.add(project);
     _createNewProject = false;
     notifyListeners();
   }
 
-  void updateProject(Project project, int index) {
+  void updateProject(GreenProject project, int index) {
     _projects[index] = project;
     _selectedIndex = -1;
     _createNewProject = false;

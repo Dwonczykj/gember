@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:template/fooderlich_theme.dart';
 import 'package:template/network/mock_service.dart';
 import 'package:template/network/template_service.dart';
 import 'package:template/ui/main_screen.dart';
@@ -57,6 +58,7 @@ class _GemberState extends State<Gember> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = FooderlichTheme.dark();
     return MultiProvider(
       providers: [
         // Provider<Repository>(
@@ -81,12 +83,7 @@ class _GemberState extends State<Gember> {
       child: MaterialApp(
         title: 'Recipes',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.white,
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: theme,
         home: Router(
           routerDelegate: _appRouter,
           backButtonDispatcher: RootBackButtonDispatcher(),

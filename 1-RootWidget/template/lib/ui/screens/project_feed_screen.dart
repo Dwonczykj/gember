@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import 'package:template/network/service_interface.dart';
 import 'package:template/network/template_service.dart';
 import 'package:template/ui/components/project_card.dart';
 import '../models/models.dart';
+import 'card1.dart';
 
 class ProjectFeedScreen extends StatefulWidget {
   static MaterialPage page() {
@@ -37,7 +39,7 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
 
   static const String prefSearchKey = 'previousSearches';
 
-  List<Project> currentSearchList = [];
+  List<GreenProject> currentSearchList = [];
 
   int currentCount = 0;
 
@@ -114,7 +116,7 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: Build Project Feed with ListView of Cards, see recipe_list.dart
-    return FutureBuilder<Response<Result<List<Project>>>>(
+    return FutureBuilder<Response<Result<List<GreenProject>>>>(
       future: Provider.of<ServiceInterface>(context)
           .queryProjects(searchTextController.text.trim()),
       builder: (context, snapshot) {
@@ -131,17 +133,18 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
 
           loading = false;
           final result = snapshot.data?.body;
+          
           // Hit an error
           if (result is Error) {
             inErrorState = true;
-            return _buildProjectList(context, currentSearchList);
+            return _buildProjectList(context, <GreenProject>[]);
           }
           final query = (result as Success).value;
           inErrorState = false;
           if (query != null) {
             currentCount = query.length;
             // hasMore = query.more;
-            // currentSearchList.addAll(query.hits);
+            currentSearchList.addAll(query);
             // if (query.to < currentEndPosition) {
             //   currentEndPosition = query.to;
             // }
@@ -163,41 +166,29 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
   }
 
   Widget _buildProjectList(
-      BuildContext context, List<Project> currentSearchList) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 16,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Projects',
-            style: Theme.of(context).textTheme.headline1,
-          ),
-          const SizedBox(height: 16),
-          Container(
-            color: Colors.transparent,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: currentSearchList.length,
-              itemBuilder: (context, index) {
-                final project = currentSearchList[index];
-                return _buildProjectCard(context, project);
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(width: 16);
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+      BuildContext context, List<GreenProject> projectList) {
+    // final List<String> entries = <String>['A', 'B', 'C'];
+    // final List<int> colorCodes = <int>[600, 500, 100];
+
+    final size = MediaQuery.of(context).size;
+    // const itemHeight = 310;
+    // final itemWidth = size.width / 1;
+
+    return ListView.separated(
+        itemBuilder: (context, index) {
+          return Card1(
+            project: projectList[index],
+          );
+        },
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            height: 8.0,
+          );
+        },
+        itemCount: projectList.length);
   }
 
-  Widget _buildProjectCard(BuildContext context, Project project) {
+  Widget _buildProjectCard(BuildContext context, GreenProject project) {
     return ProjectCard(project: project);
   }
 }
