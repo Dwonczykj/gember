@@ -14,12 +14,17 @@ import 'screens/home.dart';
 
 class MainScreen extends StatefulWidget {
   static MaterialPage page(int currentTab) {
+    // return MaterialPage(
+    //   name: TemplatePages.home,
+    //   key: ValueKey(TemplatePages.home),
+    //   child: Home(
+    //     currentTab: currentTab,
+    //   ),
+    // );
     return MaterialPage(
       name: TemplatePages.home,
       key: ValueKey(TemplatePages.home),
-      child: Home(
-        currentTab: currentTab,
-      ),
+      child: MainScreen(currentTab: currentTab),
     );
   }
 
@@ -168,7 +173,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               const BottomNavigationBarItem(
                 icon: Icon(Icons.book),
-                label: 'Recipes',
+                label: 'Profile',
               ),
               const BottomNavigationBarItem(
                 icon: Icon(Icons.list),

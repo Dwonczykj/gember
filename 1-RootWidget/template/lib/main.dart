@@ -81,7 +81,7 @@ class _GemberState extends State<Gember> {
         ),
       ],
       child: MaterialApp(
-        title: 'Recipes',
+        title: 'Gember',
         debugShowCheckedModeBanner: false,
         theme: theme,
         home: Router(

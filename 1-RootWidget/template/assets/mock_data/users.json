@@ -1,0 +1,17 @@
+{
+    "users": [
+        {
+            "user_type": "consumer",
+            "name": "Cesare",
+            "profile_picture": "assets/profile_pics/person_cesare.jpeg",
+            "cover_picture": "assets/images/cover_photo.jpeg",
+            "priorities": {
+                "ordered_projects": [
+                    {"project_uid": "1125-aefw-eqr4-f74s"},
+                    {"project_uid": "1685-aefw-eqr4-f74s"},
+                    {"project_uid": "1041-aefw-eqr4-f74s"}            
+                ]
+            }
+        }
+    ]
+}

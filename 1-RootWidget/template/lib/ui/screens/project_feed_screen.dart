@@ -10,7 +10,7 @@ import 'package:template/network/service_interface.dart';
 import 'package:template/network/template_service.dart';
 import 'package:template/ui/components/project_card.dart';
 import '../models/models.dart';
-import 'card1.dart';
+import '../components/card1.dart';
 
 class ProjectFeedScreen extends StatefulWidget {
   static MaterialPage page() {
