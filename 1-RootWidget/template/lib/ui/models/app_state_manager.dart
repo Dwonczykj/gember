@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:template/data/user_dao.dart';
 
 // 1
 class FooderlichTab {
@@ -8,11 +9,10 @@ class FooderlichTab {
   static const int toBuy = 2;
 }
 
-class AppStateManager extends ChangeNotifier {
+class AppStateManager extends UserDao {
   // 2
   bool _initialized = false;
-  // 3
-  bool _loggedIn = false;
+  
   // 4
   bool _onboardingComplete = false;
   // 5
@@ -20,7 +20,7 @@ class AppStateManager extends ChangeNotifier {
 
   // 6
   bool get isInitialized => _initialized;
-  bool get isLoggedIn => _loggedIn;
+  
   bool get isOnboardingComplete => _onboardingComplete;
   int get getSelectedTab => _selectedTab;
 
@@ -35,13 +35,6 @@ class AppStateManager extends ChangeNotifier {
         notifyListeners();
       },
     );
-  }
-
-  void login(String username, String password) {
-    // 10
-    _loggedIn = true;
-    // 11
-    notifyListeners();
   }
 
   void completeOnboarding() {
@@ -61,7 +54,7 @@ class AppStateManager extends ChangeNotifier {
 
   void logout() {
     // 12
-    _loggedIn = false;
+    super.logout();
     _onboardingComplete = false;
     _initialized = false;
     _selectedTab = 0;

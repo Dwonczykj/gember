@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:template/data/user_dao.dart';
 import 'package:template/fooderlich_theme.dart';
 import 'package:template/network/mock_service.dart';
 import 'package:template/network/template_service.dart';
@@ -61,6 +62,7 @@ class _GemberState extends State<Gember> {
     final theme = FooderlichTheme.dark();
     return MultiProvider(
       providers: [
+        // TODO 1: Add a mock repository layer to store users. Maybe checkout the fire base chapter from teh book.
         // Provider<Repository>(
         //   lazy: false,
         //   create: (_) => repository,
@@ -79,6 +81,7 @@ class _GemberState extends State<Gember> {
           create: (_) => MockService.create(),
           lazy: false,
         ),
+        // ChangeNotifierProvider(create: (_) => UserDao(), lazy: false)
       ],
       child: MaterialApp(
         title: 'Gember',

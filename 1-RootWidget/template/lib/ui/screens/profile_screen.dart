@@ -7,8 +7,7 @@ import '../models/consumer_manager.dart';
 import 'package:uuid/uuid.dart';
 import '../models/models.dart';
 
-
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static MaterialPage page() {
     return MaterialPage(
       name: TemplatePages.projectFeedPath,
@@ -24,8 +23,15 @@ class ProfileScreen extends StatelessWidget {
     this.username,
   }) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final Color rwColor = const Color.fromRGBO(64, 143, 77, 1);
+
   final TextStyle focusedStyle = const TextStyle(color: Colors.green);
+
   final TextStyle unfocusedStyle = const TextStyle(color: Colors.grey);
 
   @override
@@ -44,43 +50,28 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                  children: [
-                    Card1(
-                      project: GreenProject(
-                          uid: Uuid().v4(),
-                          name: '<Green Project>',
-                          company_name: '<Company Name>',
-                          description: 'Some Desc',
-                          short_description: 'Shorty',
-                          image_url:
-                              'https://th.bing.com/th/id/OIP.D9fLXBRbRjJtc2cgORlbKAHaE7?w=251&h=180&c=7&r=0&o=5&pid=1.7'),
-                    ),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    CardTappable(
-                        child: ProjectContents(
-                      project: GreenProject(
-                          uid: Uuid().v4(),
-                          name: '<Green Project>',
-                          company_name: '<Company Name>',
-                          description: 'Some Desc',
-                          short_description: 'Shorty',
-                          image_url:
-                              'https://th.bing.com/th/id/OIP.D9fLXBRbRjJtc2cgORlbKAHaE7?w=251&h=180&c=7&r=0&o=5&pid=1.7'),
-                    )),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    SizedBox(
-                        height: 200,
-                        child: Container(
-                          color: Colors.red,
-                        ))
-                  ],
-                ),
+                  child: Padding(
+                      padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                      child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            return CardTappable(
+                                child: ProjectContents(
+                              project: GreenProject(
+                                  uid: Uuid().v4(),
+                                  name: '<Green Project>',
+                                  company_name: '<Company Name>',
+                                  description: 'Some Desc',
+                                  short_description: 'Shorty',
+                                  image_url:
+                                      'https://th.bing.com/th/id/OIP.D9fLXBRbRjJtc2cgORlbKAHaE7?w=251&h=180&c=7&r=0&o=5&pid=1.7'),
+                            ));
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 8.0,
+                            );
+                          },
+                          itemCount: 3))
               )
             ],
           ),

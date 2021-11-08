@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:template/data/user_dao.dart';
 import 'package:template/ui/main_screen.dart';
 import 'package:template/ui/models/consumer_manager.dart';
 import 'package:template/ui/models/project_manager.dart';
+import 'package:template/ui/screens/login.dart';
 
 import '../ui/models/models.dart';
 import '../ui/screens/screens.dart';
@@ -43,7 +45,8 @@ class AppRouter extends RouterDelegate
   @override
   Widget build(BuildContext context) {
     // 7
-    return Navigator(
+    
+      return Navigator(
       // 8
       key: navigatorKey,
       onPopPage: _handlePopPage,
@@ -51,19 +54,19 @@ class AppRouter extends RouterDelegate
       pages: [
         if (!appStateManager.isInitialized) SplashScreen.page(),
 
-        if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
-          LoginScreen.page(),
+          if (appStateManager.isInitialized && !appStateManager.isLoggedIn())
+          Login(), // LoginScreen.page(),
 
-        // if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+          // if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
         //   SplashScreen.page(),
 
-        // if (appStateManager.isOnboardingComplete)
+          // if (appStateManager.isOnboardingComplete)
         //   MainScreen.page(appStateManager.getSelectedTab),
 
-        if (appStateManager.isLoggedIn)
+          if (appStateManager.isLoggedIn())
           MainScreen.page(appStateManager.getSelectedTab),
 
-        // 1
+          // 1
         // if (profileManager.isCreatingNewConsumer)
         //   // 2
         //   ProfileScreen.page(
@@ -76,7 +79,7 @@ class AppRouter extends RouterDelegate
         //     },
         //   ),
 
-        // // 1
+          // // 1
       ],
     );
   }

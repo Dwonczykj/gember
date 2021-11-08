@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 import '../models/green_project.dart';
 
 class ProjectContents extends StatelessWidget {
@@ -29,9 +30,10 @@ class ProjectContents extends StatelessWidget {
               // part of the Material and display ink effects above it. Using
               // a standard Image will obscure the ink splash.
               child: Ink.image(
-                image: AssetImage(
-                  'assets/mock_data/images/insulate_britain.jpeg',
-                ),
+                image: FadeInImage.memoryNetwork(
+                  image: project.image_url,
+                  placeholder: kTransparentImage,
+                ).image,
                 fit: BoxFit.cover,
                 child: Container(),
               ),
