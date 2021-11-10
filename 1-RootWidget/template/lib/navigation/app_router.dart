@@ -3,7 +3,7 @@ import 'package:template/data/user_dao.dart';
 import 'package:template/ui/main_screen.dart';
 import 'package:template/ui/models/consumer_manager.dart';
 import 'package:template/ui/models/project_manager.dart';
-import 'package:template/ui/screens/login.dart';
+import 'package:template/ui/screens/login_screen.dart';
 
 import '../ui/models/models.dart';
 import '../ui/screens/screens.dart';
@@ -55,7 +55,7 @@ class AppRouter extends RouterDelegate
         if (!appStateManager.isInitialized) SplashScreen.page(),
 
           if (appStateManager.isInitialized && !appStateManager.isLoggedIn())
-          Login(), // LoginScreen.page(),
+            Login.page(), // LoginScreen.page(),
 
           // if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
         //   SplashScreen.page(),

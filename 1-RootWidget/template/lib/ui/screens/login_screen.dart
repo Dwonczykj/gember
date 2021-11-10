@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:template/ui/models/models.dart';
 import '../../data/user_dao.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: TemplatePages.loginPath,
+      key: ValueKey(TemplatePages.loginPath),
+      child: const Login(),
+    );
+  }
 
   @override
   _LoginState createState() => _LoginState();
@@ -65,6 +74,12 @@ class _LoginState extends State<Login> {
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Email Required';
+                        }
+                        //
+                        var reg = RegExp(
+                            r"/^w+[+.w-]*@([w-]+.)*w+[w-]*.([a-z]{2,4}|d+)$/i"); //https://www.formget.com/regular-expression-for-email/
+                        if (!reg.hasMatch(value)) {
+                          return 'Invalid email format';
                         }
                         return null;
                       },
@@ -134,9 +149,6 @@ class _LoginState extends State<Login> {
     );
   }
 }
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';

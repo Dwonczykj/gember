@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "228813650182",
+    "project_id": "gember-af8e4",
+    "storage_bucket": "gember-af8e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228813650182:android:b9607b047bf07af99d4687",
+        "android_client_info": {
+          "package_name": "com.jdwonczyk.gember"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228813650182-4npd4lmei9jhsvrtp8fip8r4g5vf0105.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFlzfJWDONhZnFkojR0HPMvYDdBhgNknE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228813650182-4npd4lmei9jhsvrtp8fip8r4g5vf0105.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
