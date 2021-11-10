@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     pageList.add(const ProjectFeedScreen());
     pageList.add(const ProfileScreen());
-    pageList.add(Container(color: Colors.green));
+    pageList.add(const AddProjectScreen());
     getCurrentIndex();
   }
 
@@ -176,8 +176,8 @@ class _MainScreenState extends State<MainScreen> {
                 label: 'Profile',
               ),
               const BottomNavigationBarItem(
-                icon: Icon(Icons.list),
-                label: 'To Buy',
+                icon: Icon(Icons.add),
+                label: 'Promote',
               ),
             ],
           ),

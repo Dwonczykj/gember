@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     // 1
-    final userDao = Provider.of<UserDao>(context, listen: false);
+    final userDao = Provider.of<AppStateManager>(context, listen: false);
     return Scaffold(
       // 2
       appBar: AppBar(
@@ -135,6 +135,7 @@ class _LoginState extends State<Login> {
                         // 2
                         userDao.signup(
                             _emailController.text, _passwordController.text);
+                        print('Sign up pressed: ');
                       },
                       child: const Text('Sign Up'),
                     ),

@@ -32,14 +32,18 @@ class UserDao extends ChangeNotifier {
           _password_requirements_satisfied(password) == false) {
         print('Password doesn\'t meet the complexity requirements.');
       }
-      await auth.createUserWithEmailAndPassword(
+      print('creating account with email: ${email}');
+      final creds = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      print('account created with email: ${email}');
       // 3
       notifyListeners();
     } on FirebaseAuthException catch (e) {
       // 4
+      print(e.code);
+      
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
