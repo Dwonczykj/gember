@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
 part 'green_project.g.dart';
 
 @JsonSerializable()
@@ -23,6 +24,19 @@ class GreenProject {
     this.description = "",
     this.short_description = "",
   });
+
+  factory GreenProject.create(String name,
+          {String image_url = "",
+          String company_name = "",
+          String description = "",
+          String short_description = ""}) =>
+      GreenProject(
+          uid: Uuid().v4(),
+          name: name,
+          image_url: image_url,
+          company_name: company_name,
+          description: description,
+          short_description: short_description);
 
   factory GreenProject.fromJson(Map<String, dynamic> json) => GreenProject(
         uid: json['uid'] as String,

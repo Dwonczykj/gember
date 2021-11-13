@@ -3,26 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:template/data/user_dao.dart';
 
 // 1
-class FooderlichTab {
+class GemberTab {
   static const int explore = 0;
-  static const int recipes = 1;
-  static const int toBuy = 2;
+  static const int profile = 1;
+  static const int promote = 2;
 }
 
 class AppStateManager extends UserDao {
   // 2
   bool _initialized = false;
-  
+
   // 4
   bool _onboardingComplete = false;
   // 5
-  int _selectedTab = FooderlichTab.explore;
+  int _selectedTab = GemberTab.explore;
 
   // 6
   bool get isInitialized => _initialized;
-  
+
   bool get isOnboardingComplete => _onboardingComplete;
   int get getSelectedTab => _selectedTab;
+  String get currentScreenName => _tabNames[_selectedTab];
+
+  final _tabNames = <String>['Explore', 'Profile', 'Promote'];
 
   void initializeApp() {
     // 7
@@ -42,13 +45,15 @@ class AppStateManager extends UserDao {
     notifyListeners();
   }
 
+  String getScreenName(int tabIndex) => _tabNames[tabIndex];
+
   void goToTab(index) {
     _selectedTab = index;
     notifyListeners();
   }
 
-  void goToRecipes() {
-    _selectedTab = FooderlichTab.recipes;
+  void goToProfile() {
+    _selectedTab = GemberTab.profile;
     notifyListeners();
   }
 

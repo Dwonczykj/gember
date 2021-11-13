@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chopper/chopper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:template/data/project_dao.dart';
 import 'package:template/network/model_response.dart';
 import 'package:template/network/service_interface.dart';
 import 'package:template/network/template_service.dart';
@@ -115,12 +117,10 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Build Project Feed with ListView of Cards, see recipe_list.dart
-    return FutureBuilder<Response<Result<List<GreenProject>>>>(
-      future: Provider.of<ServiceInterface>(context)
-          .queryProjects(searchTextController.text.trim()),
+    final widget = StreamBuilder<Iterable<GreenProject>>(
+      stream: Provider.of<ProjectDao>(context).getProjectsStream(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (true) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -132,14 +132,15 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
           }
 
           loading = false;
-          final result = snapshot.data?.body;
-          
+          final result = snapshot.data;
+
           // Hit an error
           if (result is Error) {
             inErrorState = true;
             return _buildProjectList(context, <GreenProject>[]);
           }
-          final query = (result as Success).value;
+          // final query = (result as Success).value;
+          final query = snapshot.data;
           inErrorState = false;
           if (query != null) {
             currentCount = query.length;
@@ -163,6 +164,8 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
         }
       },
     );
+
+    return widget;
   }
 
   Widget _buildProjectList(

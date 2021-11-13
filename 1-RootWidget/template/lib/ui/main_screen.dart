@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     pageList.add(const ProjectFeedScreen());
     pageList.add(const ProfileScreen());
-    pageList.add(const AddProjectScreen());
+    pageList.add(const AddProjectScreen()); 
     getCurrentIndex();
   }
 
@@ -77,72 +77,6 @@ class _MainScreenState extends State<MainScreen> {
     saveCurrentIndex();
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   String title;
-  //   switch (_selectedIndex) {
-  //     case 0:
-  //       title = 'Gember';
-  //       break;
-  //     case 1:
-  //       title = 'Priorities';
-  //       break;
-  //     case 2:
-  //       title = 'Account';
-  //       break;
-  //     default:
-  //       title = 'Gember';
-  //       break;
-  //   }
-  //   return Scaffold(
-  //     bottomNavigationBar: BottomNavigationBar(
-  //       items: [
-  //         BottomNavigationBarItem(
-  //             icon: SvgPicture.asset('assets/images/icon_recipe.svg',
-  //                 color: _selectedIndex == 0 ? green : Colors.grey,
-  //                 semanticsLabel: 'Gember'),
-  //             label: 'Gember'),
-  //         BottomNavigationBarItem(
-  //             icon: SvgPicture.asset('assets/images/icon_bookmarks.svg',
-  //                 color: _selectedIndex == 1 ? green : Colors.grey,
-  //                 semanticsLabel: 'Priorities'),
-  //             label: 'Priorities'),
-  //         BottomNavigationBarItem(
-  //             icon: SvgPicture.asset('assets/images/icon_shopping_list.svg',
-  //                 color: _selectedIndex == 2 ? green : Colors.grey,
-  //                 semanticsLabel: 'Account'),
-  //             label: 'Account'),
-  //       ],
-  //       currentIndex: _selectedIndex,
-  //       selectedItemColor: green,
-  //       onTap: _onItemTapped,
-  //     ),
-  //     appBar: AppBar(
-  //       elevation: 0,
-  //       backgroundColor: Colors.white,
-  //       systemOverlayStyle: const SystemUiOverlayStyle(
-  //         systemNavigationBarColor: Colors.white,
-  //         statusBarColor: Colors.white,
-  //         statusBarBrightness: Brightness.light,
-  //         statusBarIconBrightness: Brightness.dark,
-  //         systemNavigationBarDividerColor: Colors.white,
-  //         //Navigation bar divider color
-  //         systemNavigationBarIconBrightness:
-  //             Brightness.light, //navigation bar icon
-  //       ),
-  //       title: Text(
-  //         title,
-  //         style: const TextStyle(
-  //             fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
-  //       ),
-  //     ),
-  //     body: IndexedStack(
-  //       index: _selectedIndex,
-  //       children: pageList,
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AppStateManager>(
@@ -150,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Gember',
+              appStateManager.currentScreenName,
               style: Theme.of(context).textTheme.headline6,
             ),
             actions: [
@@ -167,17 +101,17 @@ class _MainScreenState extends State<MainScreen> {
                   .goToTab(index);
             },
             items: <BottomNavigationBarItem>[
-              const BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Icon(Icons.explore),
-                label: 'Explore',
+                label: appStateManager.getScreenName(0),
               ),
-              const BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Icon(Icons.book),
-                label: 'Profile',
+                label: appStateManager.getScreenName(1),
               ),
-              const BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Icon(Icons.add),
-                label: 'Promote',
+                label: appStateManager.getScreenName(2),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
+import 'package:template/data/project_dao.dart';
 import 'package:template/data/user_dao.dart';
 import 'package:template/fooderlich_theme.dart';
 import 'package:template/network/mock_service.dart';
@@ -98,7 +99,7 @@ class _GemberState extends State<Gember> {
           create: (_) => MockService.create(),
           lazy: false,
         ),
-        // ChangeNotifierProvider(create: (_) => UserDao(), lazy: false)
+        ChangeNotifierProvider(create: (_) => ProjectDao(), lazy: false)
       ],
       child: MaterialApp(
         title: 'Gember',

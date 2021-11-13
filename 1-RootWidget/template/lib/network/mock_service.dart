@@ -33,7 +33,7 @@ class MockService implements ServiceInterface {
         Success<List<GreenProject>>(_projects_list.toList())));
   }
 
-  late Iterable<GreenProject> _projects_list;
+  late Iterable<GreenProject> _projects_list = <GreenProject>[];
   Random nextRecipe = Random();
 
   void init() {
