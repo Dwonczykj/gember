@@ -13,7 +13,7 @@ class ImagePickerComponent extends StatefulWidget {
 }
 
 class _ImagePickerComponentState extends State<ImagePickerComponent> {
-  XFile? _image;
+  File? _image;
   String? _uploadedFileURL;
 
   @override
@@ -60,12 +60,16 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
   Future chooseFile() async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((image) {
       setState(() {
-        _image = image;
+        _image = File(image?.path ?? '');
       });
     });
   }
 
-  Future chooseFileBrowser() async {
+  Future inferFileFromBrowserPage() async {
+    //TODO5: Implement inferring a picture embedded in the web browser home page of a project. Or show a list view of all embedded images on the page provided and allow the user to pick the one to use.
+  }
+
+  Future chooseFileFromBrowserPage() async {
     // TODO2: Introduce a webbrowser with a custom button present for user to specify the link to the project is thsi page.
     // Or take the page and pull the first image that is embedded within the page.
     // https://medium.com/flutter-community/creating-a-full-featured-browser-using-webviews-in-flutter-9c8f2923c574
@@ -78,21 +82,20 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
   }
 
   Future uploadFile() async {
-    //  TaskSnapshot taskSnapshot =
-    //       await storage.ref('$path/$imageName').putFile(file);
+    if (_image != null) {
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('projects/${Path.basename(_image!.path)}');
 
-    //   Storage
+      final uploadTask = storageReference.putFile(_image!);
 
-    //   StorageReference storageReference = FirebaseFirestore.instance
-    //       .ref()
-    //       .child('chats/${Path.basename(_image.path)}}');
-    //   StorageUploadTask uploadTask = storageReference.putFile(_image);
-    //   await uploadTask.onComplete;
-    //   print('File Uploaded');
-    //   storageReference.getDownloadURL().then((fileURL) {
-    //     setState(() {
-    //       _uploadedFileURL = fileURL;
-    //     });
-    //   });
+      await uploadTask.whenComplete(() => print('Media Uploaded'));
+
+      storageReference.getDownloadURL().then((fileURL) {
+        setState(() {
+          _uploadedFileURL = fileURL;
+        });
+      });
+    }
   }
 }
