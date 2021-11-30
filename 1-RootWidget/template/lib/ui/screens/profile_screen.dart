@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/ui/components/card_tappable.dart';
+import 'package:template/ui/components/image_picker.dart';
 import 'package:template/ui/components/project_contents.dart';
 import '../components/card1.dart';
 import '../models/consumer_manager.dart';
@@ -71,8 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 8.0,
                             );
                           },
-                          itemCount: 3))
-              )
+                          itemCount: 3)))
             ],
           ),
         ),
@@ -134,6 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  //TODO1: Add a settings page for the Profile to edit profile pic, cover photo, drag (reorder too) and remove promotions. Change nickname etc
   Widget _buildSocialProfileHeader() {
     final avatarHeight = 60.0;
     final coverPhotoBottom = avatarHeight * 0.33;
@@ -148,11 +149,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       Container(
           alignment: Alignment.bottomCenter,
-          child: CircleAvatar(
-            radius: avatarHeight * 0.5,
-            backgroundColor: Colors.transparent,
-            backgroundImage: AssetImage('assets/profile_pics/person_stef.jpeg'),
+          child: GestureDetector(
+            onTap: _avatarTapped,
+            child: CircleAvatar(
+              radius: avatarHeight * 0.5,
+              backgroundColor: Colors.transparent,
+              backgroundImage: AssetImage(
+                  'assets/profile_pics/person_stef.jpeg'), //TODO2: host this in Firebase and grab from PhotoLibrary or files.
+            ),
           ))
     ]);
+  }
+
+  void _avatarTapped() {
+    print('avatar tapped');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ImagePickerComponent(),
+      ),
+    );
   }
 }

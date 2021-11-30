@@ -19,24 +19,24 @@ class AppRouter extends RouterDelegate
   // 3
   final AppStateManager appStateManager;
   // 4
-  final ConsumerManager profileManager;
+  // final ConsumerManager profileManager;
 
   final ProjectManager projectManager;
 
   AppRouter({
     required this.appStateManager,
-    required this.profileManager,
+    // required this.profileManager,
     required this.projectManager,
   }) : navigatorKey = GlobalKey<NavigatorState>() {
     appStateManager.addListener(notifyListeners);
-    profileManager.addListener(notifyListeners);
+    // profileManager.addListener(notifyListeners);
     projectManager.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     appStateManager.removeListener(notifyListeners);
-    profileManager.removeListener(notifyListeners);
+    // profileManager.removeListener(notifyListeners);
     projectManager.removeListener(notifyListeners);
     super.dispose();
   }
@@ -101,6 +101,10 @@ class AppRouter extends RouterDelegate
     }
 
     if (route.settings.name == TemplatePages.profilePath) {
+      appStateManager.goToTab(appStateManager.getSelectedTab);
+    }
+
+    if (route.settings.name == TemplatePages.testPath) {
       appStateManager.goToTab(appStateManager.getSelectedTab);
     }
     // 6

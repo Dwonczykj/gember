@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/data/project_dao.dart';
+import 'package:template/ui/components/components.dart';
 import 'package:template/ui/models/app_state_manager.dart';
 import 'package:template/ui/models/green_project.dart';
 
@@ -124,6 +125,8 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                     return null;
                   },
                 ),
+                // WebViewGember(
+                //     title: 'Promotion', selectedUrl: 'http://www.bing.com'),
                 Row(
                   children: [
                     const SizedBox(height: 20),

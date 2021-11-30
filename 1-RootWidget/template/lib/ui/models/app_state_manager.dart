@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:template/data/user_dao.dart';
+import 'package:template/ui/screens/screens.dart';
+import 'package:template/ui/screens/test_screen.dart';
 
 // 1
 class GemberTab {
@@ -24,8 +26,14 @@ class AppStateManager extends UserDao {
   bool get isOnboardingComplete => _onboardingComplete;
   int get getSelectedTab => _selectedTab;
   String get currentScreenName => _tabNames[_selectedTab];
+  static Map<String, Widget> screenMap = <String, Widget>{
+    'Explore': const ProjectFeedScreen(),
+    'Profile': const ProfileScreen(),
+    'Promote': const AddProjectScreen(),
+    'Test': const TestScreen(),
+  };
 
-  final _tabNames = <String>['Explore', 'Profile', 'Promote'];
+  List<String> get _tabNames => screenMap.keys.toList();
 
   void initializeApp() {
     // 7

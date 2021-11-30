@@ -7,4 +7,6 @@ class TemplatePages {
   static String profilePath = '/profile';
   static String raywenderlich = '/raywenderlich';
   static String accountPath = '/account';
+
+  static String testPath = '/test';
 }

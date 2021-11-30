@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:template/data/user_dao.dart';
 import 'package:template/ui/models/consumer_manager.dart';
 import 'package:template/ui/screens/screens.dart';
 import 'colors.dart';
@@ -47,9 +51,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    pageList.add(const ProjectFeedScreen());
-    pageList.add(const ProfileScreen());
-    pageList.add(const AddProjectScreen()); 
+    pageList.addAll(AppStateManager.screenMap.values);
+    // pageList.add(const ProjectFeedScreen());
+    // pageList.add(const ProfileScreen());
+    // pageList.add(const AddProjectScreen());
     getCurrentIndex();
   }
 
@@ -88,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
               style: Theme.of(context).textTheme.headline6,
             ),
             actions: [
-              profileButton(),
+              profileButton(context),
             ],
           ),
           body: IndexedStack(index: widget.currentTab, children: pageList),
@@ -113,6 +118,10 @@ class _MainScreenState extends State<MainScreen> {
                 icon: Icon(Icons.add),
                 label: appStateManager.getScreenName(2),
               ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.lightbulb),
+                label: appStateManager.getScreenName(3),
+              ),
             ],
           ),
         );
@@ -120,7 +129,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget profileButton() {
+  Widget profileButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: GestureDetector(
@@ -134,9 +143,47 @@ class _MainScreenState extends State<MainScreen> {
           // Provider.of<ConsumerManager>(context, listen: false)
           //     .tapOnOwnProfile(true);
           // TODO: Dont hard code the following
-          Provider.of<AppStateManager>(context, listen: false).goToTab(2);
+          // Provider.of<AppStateManager>(context, listen: false).goToTab(2);
+          _showActionSheet(context);
         },
       ),
     );
+  }
+
+  void _showActionSheet(BuildContext context) {
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+          context: context,
+          builder: (context) {
+            return CupertinoActionSheet(
+              actions: [
+                CupertinoActionSheetAction(
+                    onPressed: () =>
+                        Provider.of<AppStateManager>(context, listen: false)
+                            .logout(),
+                    child: const Text('Logout')),
+                // CupertinoActionSheetAction(
+                //     onPressed: _updateProfilePictureFromWebLink,
+                //     child: Text(actions[2]))
+              ],
+            );
+          });
+    } else {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+                height: 150,
+                child: Column(children: <Widget>[
+                  ListTile(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Provider.of<UserDao>(context, listen: false).logout();
+                      },
+                      leading: const Icon(Icons.logout_outlined),
+                      title: const Text('Logout'))
+                ]));
+          });
+    }
   }
 }

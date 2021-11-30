@@ -60,7 +60,7 @@ class Gember extends StatefulWidget {
 
 class _GemberState extends State<Gember> {
   final _projectManager = ProjectManager();
-  final _consumerManager = ConsumerManager();
+  // final _consumerManager = ConsumerManager();
   final _appStateManager = AppStateManager();
 
   late AppRouter _appRouter;
@@ -69,7 +69,7 @@ class _GemberState extends State<Gember> {
   void initState() {
     _appRouter = AppRouter(
       appStateManager: _appStateManager,
-      profileManager: _consumerManager,
+      // profileManager: _consumerManager,
       projectManager: _projectManager,
     );
     super.initState();
@@ -86,9 +86,9 @@ class _GemberState extends State<Gember> {
         //   create: (_) => repository,
         //   dispose: (_, Repository repository) => repository.close(),
         // ),
-        ChangeNotifierProvider(
-          create: (context) => _consumerManager,
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => _consumerManager,
+        // ),
         ChangeNotifierProvider(
           create: (context) => _projectManager,
         ),
@@ -99,7 +99,8 @@ class _GemberState extends State<Gember> {
           create: (_) => MockService.create(),
           lazy: false,
         ),
-        ChangeNotifierProvider(create: (_) => ProjectDao(), lazy: false)
+        ChangeNotifierProvider(create: (_) => ProjectDao(), lazy: false),
+        ChangeNotifierProvider(create: (_) => UserDao(), lazy: false),
       ],
       child: MaterialApp(
         title: 'Gember',

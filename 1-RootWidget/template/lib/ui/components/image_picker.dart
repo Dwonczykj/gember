@@ -4,9 +4,18 @@ import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To F
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // For Image Picker
 import 'package:path/path.dart' as Path;
+import 'package:template/ui/models/template_pages.dart';
 
 class ImagePickerComponent extends StatefulWidget {
   const ImagePickerComponent({Key? key}) : super(key: key);
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: TemplatePages.testPath,
+      key: ValueKey(TemplatePages.testPath),
+      child: const ImagePickerComponent(),
+    );
+  }
 
   @override
   _ImagePickerComponentState createState() => _ImagePickerComponentState();
@@ -18,43 +27,61 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      children: <Widget>[
-        Text('Selected Image'),
-        _image != null
-            ? Image.asset(
-                _image?.path ?? '',
-                height: 150,
-              )
-            : Container(height: 150),
-        _image == null
-            ? ElevatedButton(
-                child: Text('Choose File'),
-                onPressed: chooseFile,
-              )
-            : Container(),
-        _image != null
-            ? ElevatedButton(
-                child: Text('Upload File'),
-                onPressed: uploadFile,
-              )
-            : Container(),
-        _image != null
-            ? ElevatedButton(
-                child: Text('Clear Selection'),
-                onPressed: () {},
-              )
-            : Container(),
-        Text('Uploaded Image'),
-        _uploadedFileURL != null
-            ? Image.network(
-                _uploadedFileURL!,
-                height: 150,
-              )
-            : Container(),
-      ],
-    ));
+    return Container(
+        child: SafeArea(
+            top: false,
+            bottom: false,
+            child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  color: Colors.grey,
+                  width: 100.0,
+                  height: 100.0,
+                  child:
+                      SizedBox(height: 8.0, width: 20, child: Text('infinity')),
+                )
+                // Center(
+                //     child: Column(
+                //   children: <Widget>[
+                //     SizedBox(
+                //       height: 12.0,
+                //       child: Text('Selected Image'),
+                //     ),
+                //     _image != null
+                //         ? Image.asset(
+                //             _image?.path ?? '',
+                //             height: 150,
+                //           )
+                //         : Container(height: 150),
+                //     _image == null
+                //         ? ElevatedButton(
+                //             child: Text('Choose File'),
+                //             onPressed: chooseFile,
+                //           )
+                //         : Container(),
+                //     _image != null
+                //         ? ElevatedButton(
+                //             child: Text('Upload File'),
+                //             onPressed: uploadFile,
+                //           )
+                //         : Container(),
+                //     _image != null
+                //         ? ElevatedButton(
+                //             child: Text('Clear Selection'),
+                //             onPressed: () {},
+                //           )
+                //         : Container(),
+                //     Text('Uploaded Image'),
+                //     _uploadedFileURL != null
+                //         ? Image.network(
+                //             _uploadedFileURL!,
+                //             height: 150,
+                //           )
+                //         : Container(),
+                //   ],
+                // ))
+                )));
   }
 
   Future chooseFile() async {
@@ -74,11 +101,9 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
     // Or take the page and pull the first image that is embedded within the page.
     // https://medium.com/flutter-community/creating-a-full-featured-browser-using-webviews-in-flutter-9c8f2923c574
 
-    // TODO1: Also update the version of firestore so that we can use the latest api to connect to our store properly. Then check the app still works.
-
     //TODO3, use the scroll view handle that we implemented in the listview tutorial from ray wenderlich to then dynamically control the state size of the radius of the avatar profile picture.
 
-    //TODO4: watch the rest of the blockchain Youtube video.
+    //TODO6 What conditions do I need satisfied to trust Jamie Barshall and Matias.
   }
 
   Future uploadFile() async {

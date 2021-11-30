@@ -15,8 +15,8 @@ class ProjectDao extends ChangeNotifier {
   void saveProject(GreenProject project) {
     collection
         .add(project.toJson())
-        .then((value) => print('${project.name} added'))
-        .catchError((error) => print("Failed to add user: $error"));
+        .then((value) => print('${project.name} added to ${collection.path}'))
+        .catchError((error) => print("Failed to add project: $error"));
   }
 
   // StreamSubscription getProjectsStreamSubsription(
