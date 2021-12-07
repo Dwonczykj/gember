@@ -3,6 +3,8 @@ import 'package:template/data/user_dao.dart';
 import 'package:template/ui/main_screen.dart';
 import 'package:template/ui/models/consumer_manager.dart';
 import 'package:template/ui/models/project_manager.dart';
+import 'package:template/ui/models/user_manager.dart';
+import 'package:template/ui/screens/edit_my_profile_screen.dart';
 import 'package:template/ui/screens/login_screen.dart';
 
 import '../ui/models/models.dart';
@@ -18,18 +20,19 @@ class AppRouter extends RouterDelegate
 
   // 3
   final AppStateManager appStateManager;
-  // 4
-  // final ConsumerManager profileManager;
+  
 
   final ProjectManager projectManager;
 
+  final UserManager myUserManager;
+
   AppRouter({
     required this.appStateManager,
-    // required this.profileManager,
+    required this.myUserManager,
     required this.projectManager,
   }) : navigatorKey = GlobalKey<NavigatorState>() {
     appStateManager.addListener(notifyListeners);
-    // profileManager.addListener(notifyListeners);
+    myUserManager.addListener(notifyListeners);
     projectManager.addListener(notifyListeners);
   }
 
@@ -45,8 +48,8 @@ class AppRouter extends RouterDelegate
   @override
   Widget build(BuildContext context) {
     // 7
-    
-      return Navigator(
+
+    return Navigator(
       // 8
       key: navigatorKey,
       onPopPage: _handlePopPage,
@@ -54,19 +57,19 @@ class AppRouter extends RouterDelegate
       pages: [
         if (!appStateManager.isInitialized) SplashScreen.page(),
 
-          if (appStateManager.isInitialized && !appStateManager.isLoggedIn())
-            Login.page(), // LoginScreen.page(),
+        if (appStateManager.isInitialized && !appStateManager.isLoggedIn())
+          Login.page(), // LoginScreen.page(),
 
-          // if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+        // if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
         //   SplashScreen.page(),
 
-          // if (appStateManager.isOnboardingComplete)
+        // if (appStateManager.isOnboardingComplete)
         //   MainScreen.page(appStateManager.getSelectedTab),
 
-          if (appStateManager.isLoggedIn())
+        if (appStateManager.isLoggedIn())
           MainScreen.page(appStateManager.getSelectedTab),
 
-          // 1
+        // 1
         // if (profileManager.isCreatingNewConsumer)
         //   // 2
         //   ProfileScreen.page(
@@ -79,7 +82,11 @@ class AppRouter extends RouterDelegate
         //     },
         //   ),
 
-          // // 1
+        // // 1
+        
+        
+        
+          
       ],
     );
   }

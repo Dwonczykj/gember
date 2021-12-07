@@ -9,6 +9,7 @@ import 'package:template/network/template_service.dart';
 import 'package:template/ui/main_screen.dart';
 import 'package:template/ui/models/app_state_manager.dart';
 import 'package:template/ui/models/project_manager.dart';
+import 'package:template/ui/models/user_manager.dart';
 
 import 'navigation/app_router.dart';
 import 'network/api_query_model.dart';
@@ -60,7 +61,7 @@ class Gember extends StatefulWidget {
 
 class _GemberState extends State<Gember> {
   final _projectManager = ProjectManager();
-  // final _consumerManager = ConsumerManager();
+  final _myUserManager = UserManager();
   final _appStateManager = AppStateManager();
 
   late AppRouter _appRouter;
@@ -69,7 +70,7 @@ class _GemberState extends State<Gember> {
   void initState() {
     _appRouter = AppRouter(
       appStateManager: _appStateManager,
-      // profileManager: _consumerManager,
+      myUserManager: _myUserManager,
       projectManager: _projectManager,
     );
     super.initState();
@@ -77,7 +78,6 @@ class _GemberState extends State<Gember> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = FooderlichTheme.dark();
     return MultiProvider(
       providers: [
         // TODO 1: Add a mock repository layer to store users. Maybe checkout the fire base chapter from teh book.
@@ -95,6 +95,7 @@ class _GemberState extends State<Gember> {
         ChangeNotifierProvider(
           create: (context) => _appStateManager,
         ),
+        ChangeNotifierProvider(create: (context) => _myUserManager),
         Provider<ServiceInterface>(
           create: (_) => MockService.create(),
           lazy: false,
@@ -105,7 +106,7 @@ class _GemberState extends State<Gember> {
       child: MaterialApp(
         title: 'Gember',
         debugShowCheckedModeBanner: false,
-        theme: theme,
+        theme: _appStateManager.theme,
         home: Router(
           routerDelegate: _appRouter,
           backButtonDispatcher: RootBackButtonDispatcher(),

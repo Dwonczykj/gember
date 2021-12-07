@@ -1,21 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'product.dart';
 import 'user.dart';
 
 class GreenKing extends GemberUser {
   final List<Product> promotions;
 
-  GreenKing(String uid, String? name, String email, {required this.promotions})
-      : super(uid: uid, name: name, email: email);
+  GreenKing(User user, {required this.promotions})
+      : super(uid: user.uid, name: user.displayName, email: user.email);
 
-  static GreenKing create({String? name, required String email}) {
-    var user = GemberUser.create(name: name, email: email);
-    return GreenKing(user.uid, user.name, user.email, promotions: <Product>[]);
+  static GreenKing create(User fireUser) {
+    return GreenKing(fireUser, promotions: <Product>[]);
   }
 
-  factory GreenKing.fromJson(Map<String, dynamic> json) =>
-      GreenKing(json['uid'], json['name'], json['email'],
+  factory GreenKing.fromJson(User fireUser, Map<String, dynamic> json) =>
+      GreenKing(fireUser,
           promotions: json['promotions']);
 
   Map<String, dynamic> toJson() =>
-      {'uid': uid, 'name': name, 'promotions': promotions};
+      {'uid': uid, 'promotions': promotions};
 }

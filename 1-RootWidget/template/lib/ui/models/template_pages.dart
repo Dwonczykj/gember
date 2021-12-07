@@ -1,6 +1,9 @@
 class TemplatePages {
   static String splashPath = '/splash';
   static String loginPath = '/login';
+  static String editUserPath = '/user/edit';
+  static String viewUserPath = '/user/view';
+
   static String onboardingPath = '/onboarding';
   static String home = '/';
   static String projectFeedPath = '/projects';

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -84,6 +85,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userDao = Provider.of<UserDao>(context, listen: true);
     return Consumer<AppStateManager>(
       builder: (context, appStateManager, child) {
         return Scaffold(
@@ -93,9 +95,11 @@ class _MainScreenState extends State<MainScreen> {
               style: Theme.of(context).textTheme.headline6,
             ),
             actions: [
-              profileButton(context),
+              profileButton(context, userDao),
             ],
+            
           ),
+
           body: IndexedStack(index: widget.currentTab, children: pageList),
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor:
@@ -119,8 +123,12 @@ class _MainScreenState extends State<MainScreen> {
                 label: appStateManager.getScreenName(2),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.lightbulb),
+                icon: Icon(Icons.lightbulb_outline),
                 label: appStateManager.getScreenName(3),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: appStateManager.getScreenName(4),
               ),
             ],
           ),
@@ -129,22 +137,20 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget profileButton(BuildContext context) {
+  Widget profileButton(BuildContext context, UserDao userDao) {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: GestureDetector(
-        child: const CircleAvatar(
+        child: CircleAvatar(
           backgroundColor: Colors.transparent,
-          backgroundImage: AssetImage(
-            'assets/profile_pics/person_stef.jpeg',
-          ),
+          backgroundImage: NetworkImage(userDao.profilePicture),
         ),
         onTap: () {
           // Provider.of<ConsumerManager>(context, listen: false)
           //     .tapOnOwnProfile(true);
           // TODO: Dont hard code the following
-          // Provider.of<AppStateManager>(context, listen: false).goToTab(2);
-          _showActionSheet(context);
+          Provider.of<AppStateManager>(context, listen: false).goToAccounts();
+          // _showActionSheet(context);
         },
       ),
     );
@@ -158,9 +164,11 @@ class _MainScreenState extends State<MainScreen> {
             return CupertinoActionSheet(
               actions: [
                 CupertinoActionSheetAction(
-                    onPressed: () =>
-                        Provider.of<AppStateManager>(context, listen: false)
-                            .logout(),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Provider.of<AppStateManager>(context, listen: false)
+                          .logout();
+                    },
                     child: const Text('Logout')),
                 // CupertinoActionSheetAction(
                 //     onPressed: _updateProfilePictureFromWebLink,

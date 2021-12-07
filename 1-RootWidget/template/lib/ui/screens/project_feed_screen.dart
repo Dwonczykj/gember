@@ -15,13 +15,13 @@ import '../models/models.dart';
 import '../components/card1.dart';
 
 class ProjectFeedScreen extends StatefulWidget {
-  static MaterialPage page() {
-    return MaterialPage(
-      name: TemplatePages.projectFeedPath,
-      key: ValueKey(TemplatePages.projectFeedPath),
-      child: const ProjectFeedScreen(),
-    );
-  }
+  // static MaterialPage page() {
+  //   return MaterialPage(
+  //     name: TemplatePages.projectFeedPath,
+  //     key: ValueKey(TemplatePages.projectFeedPath),
+  //     child: const ProjectFeedScreen(),
+  //   );
+  // }
 
   final String? username;
 
@@ -145,6 +145,7 @@ class _ProjectFeedScreenState extends State<ProjectFeedScreen> {
           if (query != null) {
             currentCount = query.length;
             // hasMore = query.more;
+            currentSearchList.clear();
             currentSearchList.addAll(query);
             // if (query.to < currentEndPosition) {
             //   currentEndPosition = query.to;

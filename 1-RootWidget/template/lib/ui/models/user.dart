@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:template/ui/models/models.dart';
 import 'package:uuid/uuid.dart';
 
@@ -7,21 +8,22 @@ class GemberUser extends Equatable {
 
   final String? name;
 
-  final String email;
+  final String? email;
 
-  late String? profile_picture;
+  String? profile_picture;
 
-  late String? cover_picture;
+  String? cover_picture;
 
-  late List<String> priorities;
+  List<String> priorities = [];
 
-  GemberUser({required this.uid, this.name, required this.email});
+  GemberUser({required this.uid, this.name, this.email});
 
-  static GemberUser create({String? name, required email}) {
-    return GemberUser(uid: Uuid().v4(), name: name, email: email);
+  static GemberUser create(User user) {
+    return GemberUser(uid: user.uid, name: user.displayName, email: user.email)
+        .withProfilePicture(user.photoURL);
   }
 
-  GemberUser withProfilePicture(String prof_pic_url) {
+  GemberUser withProfilePicture(String? prof_pic_url) {
     profile_picture = prof_pic_url;
     return this;
   }
@@ -36,7 +38,7 @@ class GemberUser extends Equatable {
     return this;
   }
 
-  factory GemberUser.fromJson(Map<String, dynamic> json) =>
+  factory GemberUser.fromJson(User cUser, Map<String, dynamic> json) =>
       GemberUser(uid: json['uid'], name: json['name'], email: json['email'])
           .withProfilePicture(json['profile_picture'])
           .withCoverPicture(json['cover_picture'])
@@ -44,8 +46,6 @@ class GemberUser extends Equatable {
 
   Map<String, dynamic> toJson() => {
         'uid': uid,
-        'name': name,
-        'profile_picture': profile_picture,
         'cover_picture': cover_picture,
         'priorities': priorities
       };
